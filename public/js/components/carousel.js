@@ -1,4 +1,4 @@
-function Carousel(props) {
+/* function Carousel(props) {
     const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     return `
         <div class="carousel" id="${carouselId}">
@@ -34,6 +34,29 @@ function Carousel(props) {
                 // Auto-advance at the specified interval
                 setInterval(() => showSlide(currentSlide + 1), interval);
             })();
+        </script>
+    `;
+}
+ */
+
+function Carousel(props) {
+    const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+    return `
+        <div class="carousel" id="${carouselId}">
+            <div class="carousel-container">
+                ${props.images.map((img, index) => `
+                    <div class="carousel-slide${index === 0 ? ' active' : ''}">
+                        <img src="${img}" alt="Carousel Image ${index + 1}">
+                    </div>
+                `).join('')}
+            </div>
+            <button class="carousel-button prev">&lt;</button>
+            <button class="carousel-button next">&gt;</button>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                initCarousel('${carouselId}', ${props.interval || 5000});
+            });
         </script>
     `;
 }
