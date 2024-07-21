@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiteBrickJS</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
 </head>
 <body>
     <div id="app">
@@ -14,8 +19,13 @@
         <div id="form-container"></div>
         <div id="card-container"></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
     <script src="/js/framework.js"></script>
     <script src="/js/components/navbar.js"></script>
+    <script src="/js/components/dropdown.js"></script>
+    <script src="/js/components/footer.js"></script>
     <script src="/js/components/carousel-init.js"></script>
     <script src="/js/components/carousel.js"></script>
     <script src="/js/components/table.js"></script>
@@ -102,5 +112,42 @@
         });
     });
     </script>
+      <div id="drop-container"></div>
+
+      <div id="footer-container"></div>
+ <!-- Include the Dropdown component -->
+
+ <script type="module">
+  // Make sure `Framework` is defined globally
+  // Initialize and render the Dropdown component with custom styles
+  Framework.render(Dropdown, { 
+        options: ['Option 1', 'Option 2', 'Option 3'], // Dropdown options
+        state: {}, // Component state
+        backgroundColor: '#f1f1f1',
+        textColor: '#333',
+        size: 'medium', // 'small', 'medium', or 'large'
+        width: '300px', // Dropdown width
+        margin: '10px', // Margin around dropdown
+        borderColor: '#888', // Border color
+        id: 'myDropdown' // ID for the dropdown
+    }, '#drop-container');
+  </script>
+
+<script type="module">
+ 
+  // Make sure `Framework` is defined globally
+  Framework.render(Dropdown, { 
+        options: ['Option 1', 'Option 2', 'Option 3'], // Dropdown options
+        state: {}, // Component state
+        backgroundColor: '#f1f1f1',
+        textColor: '#333',
+        size: 'medium', // 'small', 'medium', or 'large'
+        width: '300px', // Dropdown width
+        margin: '10px', // Margin around dropdown
+        borderColor: '#888', // Border color
+        id: 'myDropdown' // ID for the dropdown
+    }, '#drop-container');
+
+  </script>
 </body>
 </html>

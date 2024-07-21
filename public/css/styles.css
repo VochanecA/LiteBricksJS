@@ -114,6 +114,7 @@ body {
 
 
 
+
 /* Card styles */
 .card {
     background-color: #fff;
@@ -142,6 +143,26 @@ body {
 .card-image img {
     width: 100%;
     display: block;
+}
+
+
+/* Dropdown styling */
+.dropdown {
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px; /* Padding inside the dropdown */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.dropdown-small {
+    font-size: 12px;
+}
+
+.dropdown-medium {
+    font-size: 14px;
+}
+
+.dropdown-large {
+    font-size: 16px;
 }
 
 /* Form styles */
@@ -176,6 +197,42 @@ button {
     color: #fff;
     cursor: pointer;
 }
+
+/* Footer styles */
+footer {
+    padding: 1rem;
+    box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+    font-size: 1rem;
+}
+
+.footer-small {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+}
+
+.footer-medium {
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.footer-large {
+    font-size: 1.25rem;
+    padding: 1.5rem;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+
 
 /* Table styles */
 .table {
