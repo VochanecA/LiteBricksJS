@@ -14,7 +14,6 @@
         <div id="form-container"></div>
         <div id="card-container"></div>
     </div>
-
     <script src="/js/framework.js"></script>
     <script src="/js/components/navbar.js"></script>
     <script src="/js/components/carousel-init.js"></script>
@@ -24,33 +23,32 @@
     <script src="/js/components/form.js"></script>
     <script src="/js/components/cards.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            Framework.render(Navbar, {
-                backgroundColor: '#333',
-                textColor: '#fff',
-                menuPosition: 'right',
-                menuItems: [
-                    { text: 'Home', link: '/' },
-                    { text: 'About', link: '/about' },
-                    { text: 'Contact', link: '/contact' }
-                ],
-                logo: '',
-                showLogin: true,
-                showLogout: false,
-                showSignup: true
-            }, '#navbar-container');
+    document.addEventListener('DOMContentLoaded', () => {
+        Framework.render(Navbar, {
+            backgroundColor: '#333',
+            textColor: '#fff',
+            menuPosition: 'right',
+            menuItems: [
+                { text: 'Home', link: '/' },
+                { text: 'About', link: '/about' },
+                { text: 'Contact', link: '/contact' }
+            ],
+            logo: '',
+            showLogin: true,
+            showLogout: false,
+            showSignup: true
+        }, '#navbar-container');
 
-            Framework.render(Carousel, {
-                images: [
-                    '/images/1.jpeg',
-                    '/images/2.jpeg',
-                    '/images/3.jpeg'
-                ],
-                interval: 1500 // Change image every 1.5 seconds
-            }, '#carousel-container');
+        Framework.render(Carousel, {
+            images: [
+                '/images/1.jpeg',
+                '/images/2.jpeg',
+                '/images/3.jpeg'
+            ],
+            interval: 1500 // Change image every 1.5 seconds
+        }, '#carousel-container');
 
-
-Framework.render(Table, {
+        Framework.render(Table, {
     id: 'myTable',
     headerBackgroundColor: '#4CAF50',
     headerTextColor: '#ffffff',
@@ -60,7 +58,6 @@ Framework.render(Table, {
     highlightColor: '#e6e6e6',
     centered: true,
     responsive: true,
-
     columnWidths: ['10%', '30%', '20%', '40%'],
     mobileHeaderFontSize: '0.75em',
     headers: ['Name', 'Age', 'Email'],
@@ -71,39 +68,39 @@ Framework.render(Table, {
     ]
 }, '#table-container');
 
-            Framework.render(Form, {
-                action: '/submit',
-                method: 'post',
-                inputs: [
-                    { id: 'name', label: 'Name', type: 'text', name: 'name', placeholder: 'Enter your name' },
-                    { id: 'email', label: 'Email', type: 'email', name: 'email', placeholder: 'Enter your email' }
-                ],
-                buttonText: 'Submit'
-            }, '#form-container');
+        Framework.render(Form, {
+            action: '/submit',
+            method: 'post',
+            inputs: [
+                { id: 'name', label: 'Name', type: 'text', name: 'name', placeholder: 'Enter your name' },
+                { id: 'email', label: 'Email', type: 'email', name: 'email', placeholder: 'Enter your email' }
+            ],
+            buttonText: 'Submit'
+        }, '#form-container');
 
-            Framework.render(Card, {
-    id: 'myCard',
-    header: 'Card Title',
-    content: 'This is the card content.',
-    backgroundColor: '#f1f1f1',
-    textColor: '#333',
-    size: 'medium', // 'small', 'medium', or 'large'
-    image: '/images/1.jpeg',
-    imageAlt: 'Description of image',
-    horizontal: true,
-    fab: true,
-    fabColor: '#ff4081',
-    fabIcon: '+',
-    panel: false
-}, '#card-container');
+        Framework.render(Card, {
+            id: 'myCard',
+            header: 'Card Title',
+            content: 'This is the card content.',
+            backgroundColor: '#f1f1f1',
+            textColor: '#333',
+            size: 'medium', // 'small', 'medium', or 'large'
+            image: '/images/1.jpeg',
+            imageAlt: 'Description of image',
+            horizontal: true,
+            fab: true,
+            fabColor: '#ff4081',
+            fabIcon: '+',
+            panel: false
+        }, '#card-container');
 
-            // Add event listener for hamburger menu
-            document.addEventListener('click', function(event) {
-                if (event.target.closest('.hamburger')) {
-                    document.querySelector('.navbar-menu').classList.toggle('active');
-                }
-            });
+        // Add event listener for hamburger menu
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.hamburger')) {
+                document.querySelector('.navbar-menu').classList.toggle('active');
+            }
         });
+    });
     </script>
 </body>
 </html>

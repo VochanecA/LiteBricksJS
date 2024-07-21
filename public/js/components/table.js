@@ -1,95 +1,95 @@
 function Table(props) {
-    const tableId = `table-${props.id || Math.random().toString(36).substr(2, 9)}`;
-    
-    const headerStyle = `
-        background-color: ${props.headerBackgroundColor || '#f1f1f1'};
-        color: ${props.headerTextColor || '#000'};
-    `;
+    const {
+        id = 'default-table',
+        headers,
+        data,
+        headerBackgroundColor = '#4CAF50',
+        headerTextColor = '#ffffff',
+        striped = false,
+        stripedColor = '#f2f2f2',
+        highlight = false,
+        highlightColor = '#e6e6e6',
+        centered = false,
+        responsive = false,
+        columnWidths = [],
+        mobileHeaderFontSize = '0.75em'
+    } = props;
 
-    const stripedStyle = props.striped ? `
-        tbody tr:nth-child(even) {
-            background-color: ${props.stripedColor || '#f2f2f2'};
+    const style = VDOM.createElement('style', {}, `
+        #${id} {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1rem;
         }
-    ` : '';
-
-    const highlightStyle = props.highlight ? `
-        tbody tr:hover {
-            background-color: ${props.highlightColor || '#ddd'};
+        #${id} th, #${id} td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: ${centered ? 'center' : 'left'};
         }
-    ` : '';
-
-    const centeredStyle = props.centered ? `
-        text-align: center;
-    ` : '';
-
-    const columnWidths = props.columnWidths || [];
-
-    const responsiveStyle = props.responsive ? `
-        @media screen and (max-width: 600px) {
-            .${tableId}-wrapper {
-                overflow-x: auto;
-            }
-            .${tableId}.responsive thead {
-                font-size: ${props.mobileHeaderFontSize || '0.8em'};
-            }
-            .${tableId}.responsive th,
-            .${tableId}.responsive td {
-                display: block;
-                width: 100% !important;
-                box-sizing: border-box;
-            }
-            .${tableId}.responsive tr {
-                margin-bottom: 15px;
-                display: block;
-                border-bottom: 2px solid #ddd;
-            }
-            .${tableId}.responsive td {
-                text-align: right;
-                padding-left: 50%;
-                position: relative;
-                border-bottom: 1px solid #ddd;
-            }
-            .${tableId}.responsive td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-            }
+        #${id} th {
+            background-color: ${headerBackgroundColor};
+            color: ${headerTextColor};
         }
-    ` : '';
+        ${striped ? `
+            #${id} tr:nth-child(even) {
+                background-color: ${stripedColor};
+            }
+        ` : ''}
+        ${highlight ? `
+            #${id} tr:hover {
+                background-color: ${highlightColor};
+            }
+        ` : ''}
+        ${columnWidths.map((width, index) => `
+            #${id} th:nth-child(${index + 1}),
+            #${id} td:nth-child(${index + 1}) {
+                width: ${width};
+            }
+        `).join('')}
+        ${responsive ? `
+            @media screen and (max-width: 600px) {
+                #${id} thead {
+                    font-size: ${mobileHeaderFontSize};
+                }
+                #${id} th, #${id} td {
+                    display: block;
+                    width: 100% !important;
+                }
+                #${id} tr {
+                    margin-bottom: 0.625em;
+                }
+                #${id} td {
+                    border: none;
+                    position: relative;
+                    padding-left: 50%;
+                }
+                #${id} td:before {
+                    content: attr(data-label);
+                    position: absolute;
+                    left: 6px;
+                    width: 45%;
+                    padding-right: 10px;
+                    white-space: nowrap;
+                    font-weight: bold;
+                }
+            }
+        ` : ''}
+    `);
 
-    return `
-        <style>
-            .${tableId} th {
-                ${headerStyle}
-            }
-            .${tableId} {
-                ${centeredStyle}
-            }
-            ${stripedStyle}
-            ${highlightStyle}
-            ${responsiveStyle}
-            ${columnWidths.map((width, index) => `.${tableId} th:nth-child(${index + 1}), .${tableId} td:nth-child(${index + 1}) { width: ${width}; }`).join('\n')}
-        </style>
-        <div class="${tableId}-wrapper">
-            <table class="table ${tableId} ${props.responsive ? 'responsive' : ''}">
-                <thead>
-                    <tr>
-                        ${props.headers.map(header => `<th>${header}</th>`).join('')}
-                    </tr>
-                </thead>
-                <tbody>
-                    ${props.data.map(row => `
-                        <tr>
-                            ${row.map((cell, index) => `<td data-label="${props.headers[index]}">${cell}</td>`).join('')}
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
+    const headerRow = VDOM.createElement('tr', {},
+        ...headers.map(header => VDOM.createElement('th', {}, header))
+    );
+
+    const rows = data.map(row =>
+        VDOM.createElement('tr', {},
+            ...row.map((cell, index) => VDOM.createElement('td', { 'data-label': headers[index] }, cell))
+        )
+    );
+
+    const table = VDOM.createElement('table', { id },
+        VDOM.createElement('thead', {}, headerRow),
+        VDOM.createElement('tbody', {}, ...rows)
+    );
+
+    return VDOM.createElement('div', {}, style, table);
 }
